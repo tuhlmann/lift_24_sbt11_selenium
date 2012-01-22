@@ -1,7 +1,7 @@
-Lift 2.4 and SBT 0.10 Basic Example Template
+Lift 2.4 and SBT 0.11 Basic Example Template
 
-> git clone git@github.com:tuhlmann/lift_24_sbt10_basic.git
-> cd lift_24_sbt10_basic
+> git clone git@github.com:tuhlmann/lift_24_sbt11_selenium.git
+> cd lift_24_sbt11_selenium
 > sbt
 > jetty-run
 
@@ -10,5 +10,8 @@ Your webapp is running on http://localhost:8080
 The template also has support for:
 
 - the sbt idea plugin (gen-idea)
+- the sbt eclipse plugin
 - JRebel (not scanning jettyScanDirs)
-- Jetty 7 (Jetty 6 commented out)
+- Jetty 6 (Jetty 7 commented out)
+
+This template integrates Selenium WebDriver with specs2 and a basic Lift project.
