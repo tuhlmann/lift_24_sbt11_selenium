@@ -28,7 +28,8 @@ libraryDependencies ++= {
 // "org.eclipse.jetty" % "jetty-webapp" % "7.3.0.v20110203" % "jetty,test", // For Jetty 7
 
 libraryDependencies ++= Seq(
-  "org.mortbay.jetty" % "jetty" % "6.1.22" % "jetty,test", // For Jetty 6, add scope test to make jetty avl. for tests
+  "org.eclipse.jetty" % "jetty-server" % "7.6.0.v20120127" % "container,test",
+  "org.eclipse.jetty" % "jetty-webapp" % "7.6.0.v20120127" % "container,test",
   "javax.servlet" % "servlet-api" % "2.5" % "provided->default",
   "org.specs2" %% "specs2" % "1.7.1" % "test",
   "org.pegdown" % "pegdown" % "1.0.2" % "test",
@@ -41,9 +42,14 @@ libraryDependencies ++= Seq(
 // jettyClasspaths <<= (jettyClasspaths, sourceDirectory).map((j, src) => j.copy(classpath = j.classpath +++ src / "development" / "resources"))
 
 // If using JRebel uncomment next line
-jettyScanDirs := Nil
+scanDirectories := Nil
 
-temporaryWarPath <<= (sourceDirectory in Compile)(_ / "webapp")
+// Remove Java directories, otherwise sbteclipse generates them
+unmanagedSourceDirectories in Compile <<= (scalaSource in Compile)(Seq(_))
+
+unmanagedSourceDirectories in Test <<= (scalaSource in Test)(Seq(_))
+
+// temporaryWarPath <<= (sourceDirectory in Compile)(_ / "webapp")
 
 // keep only specifications ending with Spec or Unit
 //testOptions := Seq(Tests.Filter(s => Seq("Spec", "Unit").exists(s.endsWith(_))))

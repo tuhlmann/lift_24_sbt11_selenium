@@ -1,6 +1,6 @@
 import org.specs2.mutable._
-import org.mortbay.jetty.{ Connector, Server}
-import org.mortbay.jetty.webapp.{ WebAppContext }
+import org.eclipse.jetty.server.{ Connector, Server}
+import org.eclipse.jetty.webapp.{ WebAppContext }
 import com.thoughtworks.selenium._
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
@@ -19,7 +19,8 @@ object ServerContext {
 
   def initializeServer = {
     val GUI_PORT             = 8080
-
+    
+    /*
     // Setting up the jetty instance which will be running the
     // GUI for the duration of the tests
     server  = new Server(GUI_PORT)
@@ -31,6 +32,26 @@ object ServerContext {
     server.start()
     println("SERVER STARTED")
     //Thread.sleep(60000)
+    */
+
+    // Setting up the jetty instance which will be running the
+    // GUI for the duration of the tests
+    server  = new Server(GUI_PORT)
+    val context = new WebAppContext()
+
+    context.setDescriptor("src/main/webapp/WEB-INF/web.xml");
+    context.setResourceBase("src/main/webapp");
+    context.setContextPath("/");
+    context.setParentLoaderPriority(true);
+    //context.setServer(server)
+    //context.setContextPath("/")
+    //context.setWar("src/main/webapp")
+    server.setHandler(context)
+    server.start()
+    //server.join()
+    println("SERVER STARTED")
+    //Thread.sleep(60000)
+
   }
 
   def shutdownServer = {

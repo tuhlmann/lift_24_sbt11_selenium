@@ -6,8 +6,8 @@ resolvers += Classpaths.typesafeResolver
 
 resolvers += Resolver.url("Typesafe repository", new java.net.URL("http://typesafe.artifactoryonline.com/typesafe/ivy-releases/"))(Resolver.defaultIvyPatterns)
 
-addSbtPlugin("com.github.siasia" %% "xsbt-web-plugin" % "0.1.2")
+libraryDependencies <+= sbtVersion(v => "com.github.siasia" %% "xsbt-web-plugin" % (v+"-0.2.10"))
 
-addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "0.11.0")
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.0.0")
 
-addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse" % "1.4.0")
+addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.0.0")
